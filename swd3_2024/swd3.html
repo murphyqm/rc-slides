@@ -595,9 +595,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="section-7" class="level2">
-<h2 class="anchored" data-anchor-id="section-7"></h2>
-</section>
 <section id="version-control-3" class="level2">
 <h2 class="anchored" data-anchor-id="version-control-3">Version control</h2>
 <section id="essential-git-commands" class="level3">
@@ -852,23 +849,275 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="linting-and-formatting-code" class="level1">
 <h1>Linting and Formatting code</h1>
+<section id="coding-conventions" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="coding-conventions">Coding conventions</h2>
+<p>If your language or project has a standard policy, use that. For example:</p>
+<ul>
+<li>Python: <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a></li>
+<li>R: <a href="https://google.github.io/styleguide/Rguide.xml">Google’s guide for R</a>, <a href="https://style.tidyverse.org/">tidyverse style guide</a></li>
+<li>C++: <a href="https://google.github.io/styleguide/cppguide.html">Google’s style guide</a></li>
+<li>Julia: <a href="https://docs.julialang.org/en/v1/manual/style-guide/index.html">Official style guide</a></li>
+</ul>
+</section>
+<section id="linters" class="level2">
+<h2 class="anchored" data-anchor-id="linters">Linters</h2>
+<p>Linters are automated tools which enforce coding conventions and check for common mistakes. For example:</p>
+<ul>
+<li>Python:
+<ul>
+<li><a href="https://flake8.pycqa.org/en/latest/index.html">flake8</a> (flags any syntax/style errors)</li>
+<li><a href="https://black.readthedocs.io/">black</a> (enforces the style)</li>
+<li><a href="https://pycqa.github.io/isort/">isort</a> (“Sorts” imports alphabetically in groups)</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-flake8-linter" class="level2">
+<h2 class="anchored" data-anchor-id="example-flake8-linter">Example: Flake8 Linter</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda install flake8</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> flake8 myscript.py</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:2:6:</span> E201 whitespace after <span class="st">'{'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:2:11:</span> E231 missing whitespace after <span class="st">':'</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:2:14:</span> E231 missing whitespace after <span class="st">','</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:2:18:</span> E231 missing whitespace after <span class="st">':'</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:3:1:</span> E128 continuation line under-indented for visual indent</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:3:4:</span> E231 missing whitespace after <span class="st">':'</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:4:13:</span> E225 missing whitespace around operator</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:4:14:</span> E222 multiple spaces after operator</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:5:1:</span> E302 expected 2 blank lines, found 0</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:5:13:</span> E201 whitespace after <span class="st">'('</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:5:25:</span> E202 whitespace before <span class="st">')'</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:6:4:</span> E111 indentation is not a multiple of 4</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:6:9:</span> E211 whitespace before <span class="st">'('</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:6:20:</span> E202 whitespace before <span class="st">')'</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:7:8:</span> E111 indentation is not a multiple of 4</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:7:14:</span> E271 multiple spaces after keyword</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:7:25:</span> E225 missing whitespace around operator</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:8:4:</span> E301 expected 1 blank line, found 0</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:8:4:</span> E111 indentation is not a multiple of 4</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:8:17:</span> E203 whitespace before <span class="st">':'</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:8:18:</span> E231 missing whitespace after <span class="st">':'</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:9:8:</span> E128 continuation line under-indented for visual indent</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:9:9:</span> E203 whitespace before <span class="st">':'</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:9:15:</span> E252 missing whitespace around parameter equals</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:9:16:</span> E252 missing whitespace around parameter equals</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:10:8:</span> E124 closing bracket does not match visual indentation</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:10:8:</span> E125 continuation line with same indent as next logical line</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:11:8:</span> E111 indentation is not a multiple of 4</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:12:1:</span> E302 expected 2 blank lines, found 0</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:12:6:</span> E211 whitespace before <span class="st">'('</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:12:9:</span> E201 whitespace after <span class="st">'('</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:12:13:</span> E202 whitespace before <span class="st">')'</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:12:15:</span> E203 whitespace before <span class="st">':'</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:13:4:</span> E111 indentation is not a multiple of 4</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:13:10:</span> E271 multiple spaces after keyword</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:13:26:</span> E203 whitespace before <span class="st">':'</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="ex">myscript.py:13:34:</span> W291 trailing whitespace</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="linters-and-formatters" class="level2">
+<h2 class="anchored" data-anchor-id="linters-and-formatters">Linters and Formatters</h2>
 <ul>
 <li>This is the equivalent of spellchecker for your code</li>
 <li>Do yourself a favour and ensure whatever IDE you are using has this enabled!</li>
+<li>I prefer having the linter run while you code, rather than running after, but this is personal preference</li>
+<li>Many different tools available, we will have some preloaded in our devcontainer</li>
 </ul>
-<p>You can also format the code after the fact:</p>
+<p>You can see what the Black code formatter will do to your code here:</p>
 <ul>
 <li><a href="https://black.vercel.app/" data-preview-link="true">Black formatter</a></li>
 </ul>
 </section>
+</section>
+<section id="dependencies-and-virtual-environments" class="level1">
+<h1>Dependencies and Virtual Environments</h1>
+<section id="virtual-environments" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="virtual-environments">Virtual Environments</h2>
+<p>If application A needs version 1.0 of a particular module but application B needs version 2.0, then the requirements are in conflict and installing either version 1.0 or 2.0 will leave one application unable to run.</p>
+<p>The solution for this problem is to create a virtual environment, a self-contained directory tree that contains installation for particular versions of software/packages.</p>
+<section id="conda" class="level3">
+<h3 class="anchored" data-anchor-id="conda">Conda</h3>
+<ul>
+<li><a href="https://docs.conda.io/en/latest/">Conda</a> is an open source package management system and environment management system that runs on Windows, macOS, and Linux.</li>
+<li>It offers dependency and environment management for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, Fortran, and more.</li>
+<li>Easy user install via <a href="https://www.anaconda.com/download">Anaconda</a>.</li>
+<li>We will be using the minimal <a href="https://github.com/conda-forge/miniforge/blob/main/README.md">MiniForge installation</a> in our devcontainer</li>
+</ul>
+</section>
+</section>
+</section>
 <section id="documentation" class="level1">
 <h1>Documentation</h1>
-<p><strong>Comment your code!</strong></p>
+<section id="commenting-your-code" class="level2">
+<h2 class="anchored" data-anchor-id="commenting-your-code">Commenting your code</h2>
+<ul>
+<li>The most basic version of documentation is ensuring that your code is well-commented</li>
+<li>This helps make sure you know what’s happening in your code</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comments should be short, sweet, and to the point</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>constant <span class="op">=</span> <span class="fl">1.5</span>  <span class="co"># Comments can be inline too</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Comments should add additional context, can contain links</li>
+<li>Don’t add comments for the sake of commenting</li>
+</ul>
+</section>
+<section id="commenting-your-code-1" class="level2">
+<h2 class="anchored" data-anchor-id="commenting-your-code-1">Commenting your code</h2>
+<ul>
+<li>Comments to yourself can also help you to outline and plan your code</li>
+<li>You can write pseudocode in comments to help plan functions</li>
+</ul>
+<p>See this example from <a href="https://realpython.com/python-comments-guide/">RealPython</a>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_top_cities(prices):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    top_cities <span class="op">=</span> defaultdict(<span class="bu">int</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each price range</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get city searches in that price</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Count num times city was searched</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Take top 3 cities &amp; add to dict</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">dict</span>(top_cities)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="commenting-for-others" class="level2">
+<h2 class="anchored" data-anchor-id="commenting-for-others">Commenting for others</h2>
+<p>In later iterations of your code you might want to clean up your comments to yourself and formalise your documentation more</p>
+<ul>
+<li>In functions, you should add a <a href="https://peps.python.org/pep-0257/#one-line-docstrings">docstring</a></li>
+</ul>
+<p>Here’s an example of a single-line docstring from the <a href="https://peps.python.org/pep-0257/#one-line-docstrings">PEP 257 docstring guidelines</a></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kos_root():</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the pathname of the KOS root directory."""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> _kos_root</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> _kos_root: <span class="cf">return</span> _kos_root</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7"></h2>
+<p>Docstrings can be <a href="https://peps.python.org/pep-0257/#multi-line-docstrings">multiline</a> too:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="bu">complex</span>(real<span class="op">=</span><span class="fl">0.0</span>, imag<span class="op">=</span><span class="fl">0.0</span>):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Form a complex number.</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Keyword arguments:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">    real -- the real part (default 0.0)</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">    imag -- the imaginary part (default 0.0)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> imag <span class="op">==</span> <span class="fl">0.0</span> <span class="kw">and</span> real <span class="op">==</span> <span class="fl">0.0</span>:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> complex_zero</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="releases-on-github" class="level1">
 <h1>Releases on GitHub</h1>
+<section id="releases" class="level2">
+<h2 class="anchored" data-anchor-id="releases">Releases</h2>
+<blockquote class="blockquote">
+<p><a href="https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases#about-releases">Releases</a> are deployable software iterations you can package and make available for a wider audience to download and use.</p>
+</blockquote>
+<ul>
+<li><p>A release takes a snapshot of your entire repository at a specific time, bundles it all into a zipped file, and stamps it with a version number (like v1.2.0), making it easy for you to reference the exact version of your code you used for a scientific project</p></li>
+<li><p>You can link your GitHub repository to Zenodo and get a DOI for your releases</p></li>
+<li><p><a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release" data-preview-link="true">Creating a release on GitHub</a></p></li>
+</ul>
+</section>
+</section>
+<section id="working-with-an-old-project" class="level1">
+<h1>Working with an old project</h1>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8"></h2>
+<p>You probably already have multiple different projects in progress, and don’t have the time or capacity to go back and organise everything as we’ve explained.</p>
+<p>What can you do when faced with an overwhelmingly messy codebase?</p>
+<p>Apply the DeReLiCT acronym:</p>
+<ul>
+<li>Dependencies</li>
+<li>Repository</li>
+<li>License</li>
+<li>Citation</li>
+<li>Testing</li>
+</ul>
+<p>Learn more <a href="https://derelict.streamlit.app/">here</a>.</p>
+</section>
+<section id="agenda-1" class="level2">
+<h2 class="anchored" data-anchor-id="agenda-1">Agenda</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Start time</th>
+<th>End time</th>
+<th>Duration</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>10:00</strong></td>
+<td><strong>10:50</strong></td>
+<td><strong>50 min</strong></td>
+<td><strong>Intro presentation</strong></td>
+</tr>
+<tr class="even">
+<td>10:50</td>
+<td>11:00</td>
+<td><em>10 min</em></td>
+<td><em>Short break</em></td>
+</tr>
+<tr class="odd">
+<td><strong>11:00</strong></td>
+<td><strong>12:00</strong></td>
+<td><strong>60 min</strong></td>
+<td><strong>Version control and project organisation</strong></td>
+</tr>
+<tr class="even">
+<td>12:00</td>
+<td>13:00</td>
+<td><em>60 min</em></td>
+<td><em>Lunch</em></td>
+</tr>
+<tr class="odd">
+<td><strong>13:00</strong></td>
+<td><strong>13:50</strong></td>
+<td><strong>50 min</strong></td>
+<td><strong>Testing and linting code</strong></td>
+</tr>
+<tr class="even">
+<td>13:50</td>
+<td>14:00</td>
+<td><em>10 min</em></td>
+<td><em>Short break</em></td>
+</tr>
+<tr class="odd">
+<td><strong>14:00</strong></td>
+<td><strong>14:45</strong></td>
+<td><strong>45 min</strong></td>
+<td><strong>Documentation and automated workflows</strong></td>
+</tr>
+<tr class="even">
+<td>14:45</td>
+<td>15:00</td>
+<td><em>15 min</em></td>
+<td><em>Short break</em></td>
+</tr>
+<tr class="odd">
+<td><strong>15:00</strong></td>
+<td><strong>15:45</strong></td>
+<td><strong>45 min</strong></td>
+<td><strong>Packaging and releases</strong></td>
+</tr>
+<tr class="even">
+<td><strong>15:45</strong></td>
+<td><strong>16:00</strong></td>
+<td><strong>15 min</strong></td>
+<td><strong>Questions, wrap-up</strong></td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
